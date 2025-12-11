@@ -105,7 +105,7 @@ const Trasformazioni = () => {
       {/* Featured Video Section */}
       <section className="py-16 bg-card/50">
         <div className="container-custom">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <div className="text-center mb-8">
               <span className="inline-block text-primary font-body text-sm tracking-[0.3em] uppercase mb-4">
                 Video Highlight
@@ -114,17 +114,24 @@ const Trasformazioni = () => {
                 Il Cambiamento in Movimento
               </h2>
             </div>
-            <div className="relative rounded-2xl overflow-hidden shadow-elegant group">
-              <video
-                controls
-                className="w-full h-auto"
-                poster=""
-                preload="metadata"
-              >
-                <source src="/videos/trasformazione-video.mp4" type="video/mp4" />
-                Il tuo browser non supporta i video.
-              </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="relative group rounded-3xl bg-gradient-to-br from-primary/15 via-background to-secondary/20 p-1 shadow-elegant">
+              <div className="absolute inset-0 rounded-3xl border border-primary/10" />
+              <div className="relative aspect-video rounded-2xl overflow-hidden bg-black/80">
+                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/40 opacity-50 group-hover:opacity-40 transition-opacity duration-500" />
+                <video
+                  controls
+                  className="h-full w-full object-cover"
+                  poster=""
+                  preload="metadata"
+                >
+                  <source src="/videos/trasformazione-video.mp4" type="video/mp4" />
+                  Il tuo browser non supporta i video.
+                </video>
+                <div className="absolute bottom-4 left-4 bg-background/80 backdrop-blur-md px-4 py-2 rounded-full shadow-card border border-primary/10 flex items-center gap-2 text-sm font-body text-foreground">
+                  <Play size={16} className="text-primary" />
+                  Guarda la trasformazione
+                </div>
+              </div>
             </div>
           </div>
         </div>
