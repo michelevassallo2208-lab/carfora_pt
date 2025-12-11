@@ -5,7 +5,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark"
+      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-dark"
     >
       {/* Background with gradient overlay */}
       <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
@@ -31,7 +31,7 @@ const HeroSection = () => {
       <div className="relative z-10 container-custom">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left - Text Content */}
-          <div className="text-center lg:text-left order-2 lg:order-1">
+          <div className="text-center lg:text-left order-2 lg:order-1 space-y-4 md:space-y-6">
             <p
               className="font-body text-primary uppercase tracking-[0.32em] text-xs md:text-sm mb-5 animate-fade-up"
               style={{ animationDelay: "0.2s" }}
@@ -39,33 +39,33 @@ const HeroSection = () => {
               Personal Trainer
             </p>
             <h1
-              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-[1.1] mb-8 animate-fade-up"
+              className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-[1.1] animate-fade-up"
               style={{ animationDelay: "0.4s" }}
             >
               Davide<br />
               <span className="text-gradient">Carfora</span>
             </h1>
             <p
-              className="font-body text-primary-foreground/75 text-lg md:text-xl max-w-lg mx-auto lg:mx-0 mb-10 leading-relaxed animate-fade-up"
+              className="font-body text-primary-foreground/75 text-base md:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed animate-fade-up"
               style={{ animationDelay: "0.6s" }}
             >
               Trasforma il tuo corpo, supera i tuoi limiti.<br />
               Prima lezione di prova <span className="text-primary font-semibold">gratuita</span>.
             </p>
             <div
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-up"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start animate-fade-up"
               style={{ animationDelay: "0.8s" }}
             >
               <a
                 href="#contatti"
-                className="group inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-body font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-glow relative overflow-hidden"
+                className="group inline-flex items-center justify-center px-7 py-3 md:px-8 md:py-4 bg-primary text-primary-foreground font-body font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-glow relative overflow-hidden"
               >
                 <span className="relative z-10">Prenota Ora</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
               <a
                 href="#prezzi"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary/50 text-primary-foreground font-body font-semibold rounded-lg hover:border-primary hover:bg-primary/10 transition-all duration-300"
+                className="inline-flex items-center justify-center px-7 py-3 md:px-8 md:py-4 border-2 border-primary/50 text-primary-foreground font-body font-semibold rounded-lg hover:border-primary hover:bg-primary/10 transition-all duration-300"
               >
                 Listino Prezzi
               </a>

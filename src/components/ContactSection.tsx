@@ -56,23 +56,23 @@ const ContactSection = () => {
       </div>
 
       <div className="container-custom relative">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <p className="font-body text-primary uppercase tracking-[0.2em] text-sm mb-4">
             Contatti
           </p>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
+          <h2 className="font-display text-3xl md:text-5xl font-bold text-primary-foreground mb-4 md:mb-6">
             Inizia il Tuo<br />
             <span className="text-gradient">Percorso</span>
           </h2>
-          <p className="font-body text-primary-foreground/70 text-lg">
+          <p className="font-body text-primary-foreground/70 text-base md:text-lg">
             Prenota la tua prima lezione gratuita e scopri come posso aiutarti a raggiungere i tuoi obiettivi.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12">
           {/* Contact Form */}
-          <div className="bg-card rounded-2xl p-8 shadow-card">
-            <h3 className="font-display text-2xl font-semibold text-foreground mb-6">
+          <div className="bg-card rounded-2xl p-6 md:p-8 shadow-card">
+            <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground mb-5 md:mb-6">
               Inviami un Messaggio
             </h3>
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -131,7 +131,7 @@ const ContactSection = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-4 bg-primary text-primary-foreground font-body font-semibold rounded-lg hover:bg-teal-light transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02]"
+                className="w-full py-3.5 md:py-4 bg-primary text-primary-foreground font-body font-semibold rounded-lg hover:bg-teal-light transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02]"
               >
                 <Send className="w-5 h-5" />
                 Invia Messaggio
@@ -140,8 +140,8 @@ const ContactSection = () => {
           </div>
 
           {/* Contact Info */}
-          <div className="space-y-8">
-            <div className="grid sm:grid-cols-2 gap-6">
+          <div className="space-y-6 md:space-y-8">
+            <div className="grid sm:grid-cols-2 gap-5 md:gap-6">
               {contactInfo.map((info) => (
                 <div
                   key={info.label}
@@ -175,15 +175,15 @@ const ContactSection = () => {
             </div>
 
             {/* Social Links */}
-            <div className="p-6 rounded-xl bg-gradient-to-r from-primary/20 to-primary/10 border border-primary/20">
-              <h4 className="font-display text-xl font-semibold text-primary-foreground mb-4">
+            <div className="p-5 md:p-6 rounded-xl bg-gradient-to-r from-primary/20 to-primary/10 border border-primary/20">
+              <h4 className="font-display text-lg md:text-xl font-semibold text-primary-foreground mb-3 md:mb-4">
                 Seguimi sui Social
               </h4>
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-body font-medium hover:bg-teal-light transition-all duration-300 hover:scale-105"
+                className="inline-flex items-center gap-3 px-5 md:px-6 py-3 bg-primary text-primary-foreground rounded-lg font-body font-medium hover:bg-teal-light transition-all duration-300 hover:scale-105"
               >
                 <Instagram className="w-5 h-5" />
                 @davidecarfora
@@ -191,11 +191,11 @@ const ContactSection = () => {
             </div>
 
             {/* Free Trial CTA */}
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary to-teal-light text-primary-foreground">
-              <h4 className="font-display text-2xl font-bold mb-2">
+            <div className="text-center p-6 md:p-8 rounded-2xl bg-gradient-to-br from-primary to-teal-light text-primary-foreground">
+              <h4 className="font-display text-xl md:text-2xl font-bold mb-2">
                 Prima Lezione Gratuita
               </h4>
-              <p className="font-body text-primary-foreground/90 mb-4">
+              <p className="font-body text-primary-foreground/90 mb-4 text-sm md:text-base">
                 Nessun impegno. Scopri il mio metodo di allenamento.
               </p>
               <a

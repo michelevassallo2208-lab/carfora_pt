@@ -31,9 +31,9 @@ const AboutSection = () => {
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-muted/50 to-transparent" />
       
       <div className="container-custom relative">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
           {/* Left Content */}
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             <div>
               <p className="font-body text-primary uppercase tracking-[0.2em] text-sm mb-4">
                 Chi Sono
@@ -42,16 +42,16 @@ const AboutSection = () => {
                 Il Tuo Partner per il<br />
                 <span className="text-gradient">Successo Fitness</span>
               </h2>
-              <p className="font-body text-muted-foreground text-lg leading-relaxed">
+              <p className="font-body text-muted-foreground text-base md:text-lg leading-relaxed">
                 Sono Davide Carfora, Personal Trainer professionista. La mia missione è aiutarti a raggiungere i tuoi obiettivi di fitness attraverso un approccio personalizzato e scientifico. Ogni percorso è unico, proprio come te.
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
               {features.map((feature, index) => (
                 <div
                   key={feature.title}
-                  className="group p-6 rounded-xl bg-card shadow-card card-hover cursor-pointer"
+                  className="group p-5 md:p-6 rounded-xl bg-card shadow-card card-hover cursor-pointer"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors duration-300">
