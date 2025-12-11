@@ -1,24 +1,6 @@
-import { Phone, Mail, Clock, MapPin, Instagram, Send } from "lucide-react";
-import { useState } from "react";
-import { toast } from "@/hooks/use-toast";
+import { Phone, Mail, Clock, MapPin, Instagram } from "lucide-react";
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Messaggio Inviato!",
-      description: "Ti risponderò il prima possibile.",
-    });
-    setFormData({ name: "", email: "", phone: "", message: "" });
-  };
-
   const contactInfo = [
     {
       icon: Phone,
@@ -69,77 +51,7 @@ const ContactSection = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div className="bg-card rounded-2xl p-8 shadow-card">
-            <h3 className="font-display text-2xl font-semibold text-foreground mb-6">
-              Inviami un Messaggio
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label className="font-body text-sm text-muted-foreground block mb-2">
-                  Nome e Cognome
-                </label>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background font-body text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300"
-                  placeholder="Il tuo nome"
-                />
-              </div>
-              <div className="grid sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="font-body text-sm text-muted-foreground block mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background font-body text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300"
-                    placeholder="email@esempio.it"
-                  />
-                </div>
-                <div>
-                  <label className="font-body text-sm text-muted-foreground block mb-2">
-                    Telefono
-                  </label>
-                  <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background font-body text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300"
-                    placeholder="+39 xxx xxx xxxx"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="font-body text-sm text-muted-foreground block mb-2">
-                  Messaggio
-                </label>
-                <textarea
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  required
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background font-body text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300 resize-none"
-                  placeholder="Raccontami i tuoi obiettivi..."
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full py-4 bg-primary text-primary-foreground font-body font-semibold rounded-lg hover:bg-teal-light transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02]"
-              >
-                <Send className="w-5 h-5" />
-                Invia Messaggio
-              </button>
-            </form>
-          </div>
-
-          {/* Contact Info */}
+        <div className="grid gap-12">
           <div className="space-y-8">
             <div className="grid sm:grid-cols-2 gap-6">
               {contactInfo.map((info) => (
@@ -190,23 +102,43 @@ const ContactSection = () => {
               </a>
             </div>
 
-            {/* Free Trial CTA */}
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary to-teal-light text-primary-foreground">
-              <h4 className="font-display text-2xl font-bold mb-2">
-                Prima Lezione Gratuita
-              </h4>
-              <p className="font-body text-primary-foreground/90 mb-4">
-                Nessun impegno. Scopri il mio metodo di allenamento.
-              </p>
-              <a
-                href="https://wa.me/393347466610"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-primary-foreground text-primary rounded-lg font-body font-semibold hover:scale-105 transition-transform duration-300"
-              >
-                <Phone className="w-5 h-5" />
-                Contattami Ora
-              </a>
+            <div className="grid lg:grid-cols-2 gap-6">
+              {/* Free Trial CTA */}
+              <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary to-teal-light text-primary-foreground">
+                <h4 className="font-display text-2xl font-bold mb-2">
+                  Prima Lezione Gratuita
+                </h4>
+                <p className="font-body text-primary-foreground/90 mb-4">
+                  Nessun impegno. Scopri il mio metodo di allenamento.
+                </p>
+                <a
+                  href="https://wa.me/393347466610"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary-foreground text-primary rounded-lg font-body font-semibold hover:scale-105 transition-transform duration-300"
+                >
+                  <Phone className="w-5 h-5" />
+                  Contattami Ora
+                </a>
+              </div>
+              <div className="relative overflow-hidden p-8 rounded-2xl bg-gradient-to-br from-secondary via-dark to-primary text-primary-foreground shadow-card border border-primary/30 flex flex-col justify-center gap-4">
+                <div className="absolute inset-0 bg-black/10" aria-hidden />
+                <div className="relative space-y-4">
+                  <h4 className="font-display text-2xl font-bold">Preferisci un messaggio diretto?</h4>
+                  <p className="font-body text-primary-foreground/90">
+                    Scrivimi su WhatsApp e organizziamo insieme il tuo percorso personalizzato.
+                  </p>
+                  <a
+                    href="https://wa.me/393347466610"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary-foreground text-primary rounded-lg font-body font-semibold hover:bg-white transition-transform duration-300 hover:scale-105 w-fit shadow-lg"
+                  >
+                    <Phone className="w-5 h-5" />
+                    Scrivimi su WhatsApp
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
