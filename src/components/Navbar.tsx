@@ -23,13 +23,13 @@ const Navbar = () => {
   }, [isMobileMenuOpen]);
 
   const navLinks = [
-    { href: "#home", label: "Home" },
-    { href: "#chi-sono", label: "Chi Sono" },
-    { href: "#servizi", label: "Servizi" },
+    { href: "/#home", label: "Home" },
+    { href: "/#chi-sono", label: "Chi Sono" },
+    { href: "/#servizi", label: "Servizi" },
     { href: "/trasformazioni", label: "Trasformazioni", isPage: true },
-    { href: "#certificazioni", label: "Certificazioni" },
-    { href: "#prezzi", label: "Prezzi" },
-    { href: "#contatti", label: "Contatti" },
+    { href: "/#certificazioni", label: "Certificazioni" },
+    { href: "/#prezzi", label: "Prezzi" },
+    { href: "/#contatti", label: "Contatti" },
   ];
 
   return (
@@ -41,7 +41,7 @@ const Navbar = () => {
       }`}
     >
       <div className="container-custom flex items-center justify-between">
-        <a href="#home" className="flex items-center gap-3 group">
+        <Link to="/" className="flex items-center gap-3 group">
           <img
             src={logo}
             alt="Davide Carfora Personal Trainer"
@@ -54,32 +54,20 @@ const Navbar = () => {
           >
             Davide Carfora
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            link.isPage ? (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`font-body text-sm font-semibold tracking-wide uppercase transition-all duration-300 hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full ${
-                  isScrolled ? "text-foreground" : "text-primary-foreground"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ) : (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`font-body text-sm font-semibold tracking-wide uppercase transition-all duration-300 hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full ${
-                  isScrolled ? "text-foreground" : "text-primary-foreground"
-                }`}
-              >
-                {link.label}
-              </a>
-            )
+            <Link
+              key={link.href}
+              to={link.href}
+              className={`font-body text-sm font-semibold tracking-wide uppercase transition-all duration-300 hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full ${
+                isScrolled ? "text-foreground" : "text-primary-foreground"
+              }`}
+            >
+              {link.label}
+            </Link>
           ))}
         </div>
 
@@ -111,36 +99,25 @@ const Navbar = () => {
           }`}
         >
           <div className="px-6 py-6 flex flex-col gap-2">
-            {navLinks.map((link) =>
-              link.isPage ? (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="font-body text-foreground text-lg font-semibold py-3 border-b border-border/50 last:border-b-0 hover:text-primary transition-colors duration-300"
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="font-body text-foreground text-lg font-semibold py-3 border-b border-border/50 last:border-b-0 hover:text-primary transition-colors duration-300"
-                >
-                  {link.label}
-                </a>
-              )
-            )}
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="font-body text-foreground text-lg font-semibold py-3 border-b border-border/50 last:border-b-0 hover:text-primary transition-colors duration-300"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
           <div className="px-6 pb-6">
-            <a
-              href="#contatti"
+            <Link
+              to="/#contatti"
               onClick={() => setIsMobileMenuOpen(false)}
               className="block w-full text-center py-3 rounded-xl bg-primary text-primary-foreground font-body font-semibold shadow-card hover:shadow-card-hover transition-transform duration-300 hover:-translate-y-0.5"
             >
               Prenota una consulenza
-            </a>
+            </Link>
           </div>
         </div>
       </div>

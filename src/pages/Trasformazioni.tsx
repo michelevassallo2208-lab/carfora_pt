@@ -77,10 +77,10 @@ const Trasformazioni = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative pt-32 pb-16 bg-gradient-to-b from-background via-background to-card">
+      <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 bg-gradient-to-b from-background via-background to-card">
         <div className="container-custom">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-8 group"
           >
             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
@@ -91,11 +91,11 @@ const Trasformazioni = () => {
             <span className="inline-block text-primary font-body text-sm tracking-[0.3em] uppercase mb-4">
               Risultati Reali
             </span>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-6">
+            <h1 className="font-display text-3xl md:text-5xl lg:text-6xl text-foreground mb-4 md:mb-6">
               Trasformazioni
             </h1>
-            <p className="text-muted-foreground text-lg md:text-xl font-body max-w-2xl mx-auto">
-              Storie vere di cambiamento. Ogni trasformazione è il risultato di dedizione, 
+            <p className="text-muted-foreground text-base md:text-xl font-body max-w-2xl mx-auto">
+              Storie vere di cambiamento. Ogni trasformazione è il risultato di dedizione,
               costanza e un programma personalizzato.
             </p>
           </div>
@@ -103,41 +103,48 @@ const Trasformazioni = () => {
       </section>
 
       {/* Featured Video Section */}
-      <section className="py-16 bg-card/50">
+      <section className="py-12 md:py-16 bg-card/50">
         <div className="container-custom">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <div className="text-center mb-8">
               <span className="inline-block text-primary font-body text-sm tracking-[0.3em] uppercase mb-4">
                 Video Highlight
               </span>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground">
+              <h2 className="font-display text-2xl md:text-4xl text-foreground">
                 Il Cambiamento in Movimento
               </h2>
             </div>
-            <div className="relative rounded-2xl overflow-hidden shadow-elegant group">
-              <video
-                controls
-                className="w-full h-auto"
-                poster=""
-                preload="metadata"
-              >
-                <source src="/videos/trasformazione-video.mp4" type="video/mp4" />
-                Il tuo browser non supporta i video.
-              </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="relative group rounded-3xl bg-gradient-to-br from-primary/15 via-background to-secondary/20 p-1 shadow-elegant">
+              <div className="absolute inset-0 rounded-3xl border border-primary/10" />
+              <div className="relative aspect-video rounded-2xl overflow-hidden bg-black/80">
+                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/40 opacity-50 group-hover:opacity-40 transition-opacity duration-500" />
+                <video
+                  controls
+                  className="h-full w-full object-cover"
+                  poster=""
+                  preload="metadata"
+                >
+                  <source src="/videos/trasformazione-video.mp4" type="video/mp4" />
+                  Il tuo browser non supporta i video.
+                </video>
+                <div className="absolute bottom-4 left-4 bg-background/80 backdrop-blur-md px-4 py-2 rounded-full shadow-card border border-primary/10 flex items-center gap-2 text-sm font-body text-foreground">
+                  <Play size={16} className="text-primary" />
+                  Guarda la trasformazione
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Transformations Grid */}
-      <section className="py-16">
+      <section className="py-12 md:py-16">
         <div className="container-custom">
-          <div className="grid gap-16 md:gap-20">
+          <div className="grid gap-12 md:gap-20">
             {transformations.map((transformation, index) => (
-              <article 
+              <article
                 key={transformation.id}
-                className={`grid lg:grid-cols-2 gap-8 lg:gap-12 items-center ${
+                className={`grid lg:grid-cols-2 gap-6 md:gap-10 lg:gap-12 items-center ${
                   index % 2 === 1 ? "lg:flex-row-reverse" : ""
                 }`}
               >
@@ -159,21 +166,21 @@ const Trasformazioni = () => {
                 </div>
 
                 {/* Content */}
-                <div className={`space-y-6 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                <div className={`space-y-5 md:space-y-6 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
                   <div>
                     <span className="text-primary font-body text-sm tracking-wider uppercase">
                       Storia di Successo
                     </span>
-                    <h2 className="font-display text-3xl md:text-4xl text-foreground mt-2">
+                    <h2 className="font-display text-2xl md:text-4xl text-foreground mt-2">
                       {transformation.name}
                     </h2>
                   </div>
-                  
-                  <p className="text-muted-foreground font-body text-lg leading-relaxed">
+
+                  <p className="text-muted-foreground font-body text-base md:text-lg leading-relaxed">
                     {transformation.description}
                   </p>
-                  
-                  <blockquote className="border-l-4 border-primary pl-6 py-2">
+
+                  <blockquote className="border-l-4 border-primary pl-5 md:pl-6 py-2">
                     <p className="text-foreground/80 font-body italic text-base">
                       "{transformation.quote}"
                     </p>
@@ -186,12 +193,12 @@ const Trasformazioni = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-b from-card to-background">
+      <section className="py-14 md:py-20 bg-gradient-to-b from-card to-background">
         <div className="container-custom text-center">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+          <h2 className="font-display text-2xl md:text-4xl text-foreground mb-4 md:mb-6">
             Vuoi Essere la Prossima Trasformazione?
           </h2>
-          <p className="text-muted-foreground font-body text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-muted-foreground font-body text-base md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto">
             Inizia il tuo percorso di cambiamento oggi stesso. Contattami per una consulenza gratuita.
           </p>
           <a

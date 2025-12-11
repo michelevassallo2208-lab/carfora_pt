@@ -5,25 +5,21 @@ const services = [
     icon: Dumbbell,
     title: "Personal Training",
     description: "Allenamenti individuali personalizzati per raggiungere i tuoi obiettivi specifici, con costante monitoraggio dei progressi.",
-    price: "da €30",
   },
   {
     icon: Heart,
     title: "Fit Boxe",
     description: "Un mix esplosivo di boxe e fitness che ti permetterà di bruciare calorie e scaricare lo stress in modo divertente.",
-    price: "€30",
   },
   {
     icon: Activity,
     title: "Ginnastica Posturale",
     description: "Migliora la tua postura, previeni dolori e tensioni muscolari con esercizi mirati e tecniche specifiche.",
-    price: "€30",
   },
   {
     icon: Sparkles,
     title: "Consulenza Gratuita",
     description: "Prima lezione di prova gratuita per conoscerti e definire insieme il percorso più adatto a te.",
-    price: "Gratis",
   },
 ];
 
@@ -37,24 +33,24 @@ const ServicesSection = () => {
       </div>
 
       <div className="container-custom relative">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <p className="font-body text-primary uppercase tracking-[0.2em] text-sm mb-4">
             Servizi Offerti
           </p>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4 md:mb-6">
             Cosa Posso Fare<br />
             <span className="text-gradient">Per Te</span>
           </h2>
-          <p className="font-body text-muted-foreground text-lg">
+          <p className="font-body text-muted-foreground text-base md:text-lg">
             Offro una gamma completa di servizi per accompagnarti nel tuo percorso di trasformazione fisica e mentale.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {services.map((service, index) => (
             <div
               key={service.title}
-              className="group relative bg-card rounded-2xl p-8 shadow-card card-hover overflow-hidden"
+              className="group relative bg-card rounded-2xl p-6 md:p-8 shadow-card card-hover overflow-hidden"
               style={{ animationDelay: `${index * 0.15}s` }}
             >
               {/* Hover Gradient */}
@@ -72,15 +68,6 @@ const ServicesSection = () => {
                 <p className="font-body text-muted-foreground text-sm mb-6 leading-relaxed">
                   {service.description}
                 </p>
-                
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-2xl font-bold text-primary">
-                    {service.price}
-                  </span>
-                  <span className="text-muted-foreground text-sm">
-                    /lezione
-                  </span>
-                </div>
               </div>
             </div>
           ))}
