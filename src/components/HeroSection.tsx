@@ -5,10 +5,15 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark"
+      className="relative min-h-[88vh] flex items-center justify-center overflow-hidden bg-dark"
     >
       {/* Background with gradient overlay */}
       <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
+      <div className="absolute inset-0 grid-overlay" />
+
+      {/* Accent corners */}
+      <div className="absolute -left-20 -top-20 w-72 h-72 rounded-full bg-primary/15 blur-3xl" />
+      <div className="absolute -right-16 bottom-10 w-80 h-80 rounded-full bg-accent/20 blur-3xl" />
 
       {/* Animated glow effects */}
       <div className="absolute inset-0 overflow-hidden">
@@ -31,54 +36,52 @@ const HeroSection = () => {
       <div className="relative z-10 container-custom">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left - Text Content */}
-          <div className="text-center lg:text-left order-2 lg:order-1">
-            <p
-              className="font-body text-primary uppercase tracking-[0.32em] text-xs md:text-sm mb-5 animate-fade-up"
+          <div className="text-center lg:text-left order-2 lg:order-1 space-y-5 md:space-y-7">
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary font-body text-xs md:text-sm uppercase tracking-[0.3em] animate-fade-up"
               style={{ animationDelay: "0.2s" }}
             >
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               Personal Trainer
-            </p>
-            <h1
-              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-[1.1] mb-8 animate-fade-up"
-              style={{ animationDelay: "0.4s" }}
-            >
-              Davide<br />
-              <span className="text-gradient">Carfora</span>
-            </h1>
-            <p
-              className="font-body text-primary-foreground/75 text-lg md:text-xl max-w-lg mx-auto lg:mx-0 mb-10 leading-relaxed animate-fade-up"
-              style={{ animationDelay: "0.6s" }}
-            >
-              Trasforma il tuo corpo, supera i tuoi limiti.<br />
-              Prima lezione di prova <span className="text-primary font-semibold">gratuita</span>.
-            </p>
-            <div
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-up"
-              style={{ animationDelay: "0.8s" }}
-            >
-              <a
-                href="#contatti"
-                className="group inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-body font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-glow relative overflow-hidden"
+            </div>
+
+            <div className="glass-gradient rounded-3xl p-6 md:p-8 shadow-glow animate-fade-up" style={{ animationDelay: "0.35s" }}>
+              <h1
+                className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-[1.05]"
               >
-                <span className="relative z-10">Prenota Ora</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </a>
-              <a
-                href="#prezzi"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary/50 text-primary-foreground font-body font-semibold rounded-lg hover:border-primary hover:bg-primary/10 transition-all duration-300"
+                Davide<br />
+                <span className="text-gradient">Carfora</span>
+              </h1>
+              <p
+                className="font-body text-primary-foreground/80 text-base md:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed mt-4"
               >
-                Listino Prezzi
-              </a>
+                Trasforma il tuo corpo, supera i tuoi limiti.<br />
+                Prima lezione di prova <span className="text-primary font-semibold">gratuita</span>.
+              </p>
+              <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                <a
+                  href="#contatti"
+                  className="group inline-flex items-center justify-center px-7 py-3 md:px-8 md:py-4 bg-primary text-primary-foreground font-body font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-glow relative overflow-hidden"
+                >
+                  <span className="relative z-10">Prenota Ora</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </a>
+                <a
+                  href="#prezzi"
+                  className="inline-flex items-center justify-center px-7 py-3 md:px-8 md:py-4 border border-primary/50 text-primary-foreground font-body font-semibold rounded-xl hover:border-primary hover:bg-primary/10 transition-all duration-300"
+                >
+                  Listino Prezzi
+                </a>
+              </div>
             </div>
           </div>
 
           {/* Right - Hero Image */}
-          <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end animate-fade-up" style={{ animationDelay: "0.3s" }}>
+          <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end animate-fade-up" style={{ animationDelay: "0.4s" }}>
             {/* Glowing ring effect */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-80 h-80 md:w-[400px] md:h-[400px] rounded-full border-2 border-primary/30 animate-pulse" />
-              <div className="absolute w-[350px] h-[350px] md:w-[450px] md:h-[450px] rounded-full border border-primary/25" />
-              <div className="absolute w-[420px] h-[420px] md:w-[520px] md:h-[520px] rounded-full border border-primary/15" />
+              <div className="w-80 h-80 md:w-[400px] md:h-[400px] rounded-full border-2 border-primary/25 animate-pulse" />
+              <div className="absolute w-[350px] h-[350px] md:w-[450px] md:h-[450px] rounded-full border border-primary/20" />
+              <div className="absolute w-[420px] h-[420px] md:w-[520px] md:h-[520px] rounded-full border border-primary/10" />
             </div>
             
             {/* Image container with effects */}
@@ -88,16 +91,19 @@ const HeroSection = () => {
               
               {/* Main image */}
               <div className="relative">
-                <img
-                  src={heroImage}
-                  alt="Davide Carfora Personal Trainer"
-                  className="relative z-10 w-72 h-auto md:w-96 lg:w-[450px] object-contain drop-shadow-2xl"
-                  style={{
-                    filter: 'drop-shadow(0 0 40px hsl(222 78% 55% / 0.38))'
-                  }}
-                />
-                {/* Gradient overlay on image for blend */}
-                <div className="absolute inset-0 z-20 bg-gradient-to-t from-dark via-transparent to-transparent opacity-30 pointer-events-none" />
+                <div className="absolute inset-6 rounded-3xl bg-gradient-to-br from-primary/15 via-transparent to-primary/5 blur-2xl" />
+                <div className="relative overflow-hidden rounded-[28px] border border-primary/15 bg-dark/40 backdrop-blur-md shadow-2xl">
+                  <img
+                    src={heroImage}
+                    alt="Davide Carfora Personal Trainer"
+                    className="relative z-10 w-72 h-auto md:w-96 lg:w-[450px] object-contain drop-shadow-2xl"
+                    style={{
+                      filter: 'drop-shadow(0 0 40px hsl(222 78% 55% / 0.38))'
+                    }}
+                  />
+                  {/* Gradient overlay on image for blend */}
+                  <div className="absolute inset-0 z-20 bg-gradient-to-t from-dark via-transparent to-transparent opacity-30 pointer-events-none" />
+                </div>
               </div>
             </div>
           </div>
