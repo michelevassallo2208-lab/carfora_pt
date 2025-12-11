@@ -6,53 +6,53 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 8%;
+    --background: 220 33% 97%;
+    --foreground: 217 28% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 8%;
+    --card-foreground: 217 28% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 8%;
+    --popover-foreground: 217 28% 10%;
 
-    --primary: 170 45% 35%;
+    --primary: 222 78% 55%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 35 30% 92%;
-    --secondary-foreground: 0 0% 8%;
+    --secondary: 219 28% 15%;
+    --secondary-foreground: 220 33% 97%;
 
-    --muted: 35 20% 94%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 220 16% 92%;
+    --muted-foreground: 220 11% 38%;
 
-    --accent: 170 45% 35%;
+    --accent: 210 88% 52%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 35 20% 88%;
-    --input: 35 20% 88%;
-    --ring: 170 45% 35%;
+    --border: 220 16% 85%;
+    --input: 220 16% 85%;
+    --ring: 222 78% 55%;
 
     --radius: 0.75rem;
 
     /* Custom tokens */
-    --cream: 35 30% 95%;
-    --teal: 170 45% 35%;
-    --teal-light: 170 45% 45%;
-    --teal-dark: 170 45% 25%;
-    --dark: 0 0% 8%;
-    --gold: 40 60% 50%;
+    --cream: 220 20% 96%;
+    --teal: 222 78% 55%;
+    --teal-light: 210 88% 60%;
+    --teal-dark: 220 46% 26%;
+    --dark: 215 28% 8%;
+    --gold: 44 90% 52%;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 5%) 0%, hsl(0 0% 15%) 100%);
-    --gradient-teal: linear-gradient(135deg, hsl(var(--teal)) 0%, hsl(var(--teal-light)) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(35 30% 97%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(215 30% 8%) 0%, hsl(220 26% 12%) 45%, hsl(222 78% 32%) 100%);
+    --gradient-teal: linear-gradient(135deg, hsl(222 78% 55%) 0%, hsl(210 88% 52%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 20% 95%) 100%);
 
     /* Shadows */
-    --shadow-card: 0 4px 20px -4px hsl(0 0% 0% / 0.1);
-    --shadow-card-hover: 0 20px 40px -12px hsl(var(--teal) / 0.25);
-    --shadow-glow: 0 0 60px hsl(var(--teal) / 0.3);
+    --shadow-card: 0 4px 20px -4px hsl(215 30% 8% / 0.12);
+    --shadow-card-hover: 0 20px 40px -12px hsl(222 78% 55% / 0.25);
+    --shadow-glow: 0 0 60px hsl(222 78% 55% / 0.32);
 
     /* Fonts */
     --font-display: 'Playfair Display', serif;
@@ -60,29 +60,29 @@
   }
 
   .dark {
-    --background: 0 0% 5%;
+    --background: 220 30% 6%;
     --foreground: 0 0% 95%;
 
-    --card: 0 0% 10%;
+    --card: 220 26% 10%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 10%;
+    --popover: 220 26% 10%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 170 45% 45%;
+    --primary: 210 88% 60%;
     --primary-foreground: 0 0% 5%;
 
-    --secondary: 0 0% 15%;
+    --secondary: 218 28% 14%;
     --secondary-foreground: 0 0% 95%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 218 28% 18%;
+    --muted-foreground: 0 0% 75%;
 
-    --accent: 170 45% 45%;
+    --accent: 210 88% 60%;
     --accent-foreground: 0 0% 5%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
+    --border: 218 24% 22%;
+    --input: 218 24% 22%;
   }
 }
 

@@ -8,13 +8,13 @@ const HeroSection = () => {
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark"
     >
       {/* Background with gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark via-dark/95 to-teal-dark/20" />
+      <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
 
       {/* Animated glow effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: "1.5s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-dark/30 rounded-full blur-[180px]" />
+        <div className="absolute bottom-1/3 right-1/4 w-[520px] h-[520px] bg-accent/15 rounded-full blur-[160px] animate-pulse" style={{ animationDelay: "1.5s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[620px] h-[620px] bg-teal-dark/40 rounded-full blur-[190px]" />
       </div>
 
       {/* Grid pattern overlay */}
@@ -33,7 +33,7 @@ const HeroSection = () => {
           {/* Left - Text Content */}
           <div className="text-center lg:text-left order-2 lg:order-1">
             <p
-              className="font-body text-primary uppercase tracking-[0.4em] text-sm md:text-base mb-6 animate-fade-up"
+              className="font-body text-primary uppercase tracking-[0.32em] text-xs md:text-sm mb-5 animate-fade-up"
               style={{ animationDelay: "0.2s" }}
             >
               Personal Trainer
@@ -46,7 +46,7 @@ const HeroSection = () => {
               <span className="text-gradient">Carfora</span>
             </h1>
             <p
-              className="font-body text-primary-foreground/70 text-lg md:text-xl max-w-lg mx-auto lg:mx-0 mb-10 leading-relaxed animate-fade-up"
+              className="font-body text-primary-foreground/75 text-lg md:text-xl max-w-lg mx-auto lg:mx-0 mb-10 leading-relaxed animate-fade-up"
               style={{ animationDelay: "0.6s" }}
             >
               Trasforma il tuo corpo, supera i tuoi limiti.<br />
@@ -61,7 +61,7 @@ const HeroSection = () => {
                 className="group inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-body font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-glow relative overflow-hidden"
               >
                 <span className="relative z-10">Prenota Ora</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-teal-light to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
               <a
                 href="#prezzi"
@@ -77,14 +77,14 @@ const HeroSection = () => {
             {/* Glowing ring effect */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-80 h-80 md:w-[400px] md:h-[400px] rounded-full border-2 border-primary/30 animate-pulse" />
-              <div className="absolute w-[350px] h-[350px] md:w-[450px] md:h-[450px] rounded-full border border-primary/20" />
-              <div className="absolute w-[420px] h-[420px] md:w-[520px] md:h-[520px] rounded-full border border-primary/10" />
+              <div className="absolute w-[350px] h-[350px] md:w-[450px] md:h-[450px] rounded-full border border-primary/25" />
+              <div className="absolute w-[420px] h-[420px] md:w-[520px] md:h-[520px] rounded-full border border-primary/15" />
             </div>
             
             {/* Image container with effects */}
             <div className="relative">
               {/* Teal glow behind image */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-96 md:h-96 bg-primary/40 rounded-full blur-3xl" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-96 md:h-96 bg-primary/45 rounded-full blur-3xl" />
               
               {/* Main image */}
               <div className="relative">
@@ -93,7 +93,7 @@ const HeroSection = () => {
                   alt="Davide Carfora Personal Trainer"
                   className="relative z-10 w-72 h-auto md:w-96 lg:w-[450px] object-contain drop-shadow-2xl"
                   style={{
-                    filter: 'drop-shadow(0 0 40px hsl(170 45% 35% / 0.4))'
+                    filter: 'drop-shadow(0 0 40px hsl(222 78% 55% / 0.38))'
                   }}
                 />
                 {/* Gradient overlay on image for blend */}

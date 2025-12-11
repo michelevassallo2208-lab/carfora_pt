@@ -110,9 +110,9 @@ export default {
         pulse: "pulse 2s ease-in-out infinite",
       },
       boxShadow: {
-        card: "0 4px 20px -4px hsl(0 0% 0% / 0.1)",
-        "card-hover": "0 20px 40px -12px hsl(170 45% 35% / 0.25)",
-        glow: "0 0 60px hsl(170 45% 35% / 0.3)",
+        card: "0 4px 20px -4px hsl(215 30% 8% / 0.12)",
+        "card-hover": "0 20px 40px -12px hsl(222 78% 55% / 0.25)",
+        glow: "0 0 60px hsl(222 78% 55% / 0.32)",
       },
     },
   },
