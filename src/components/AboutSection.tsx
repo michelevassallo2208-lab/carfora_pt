@@ -28,64 +28,70 @@ const AboutSection = () => {
   return (
     <section id="chi-sono" className="section-padding bg-background relative overflow-hidden">
       {/* Decorative Element */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-muted/50 to-transparent" />
-      
+      <div className="absolute inset-0 opacity-50">
+        <div className="absolute -left-10 top-24 w-64 h-64 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-muted/40 via-transparent to-transparent" />
+      </div>
+
       <div className="container-custom relative">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
-          <div className="space-y-8">
-            <div>
-              <p className="font-body text-primary uppercase tracking-[0.2em] text-sm mb-4">
-                Chi Sono
-              </p>
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
-                Il Tuo Partner per il<br />
-                <span className="text-gradient">Successo Fitness</span>
-              </h2>
-              <p className="font-body text-muted-foreground text-lg leading-relaxed">
-                Sono Davide Carfora, Personal Trainer professionista. La mia missione è aiutarti a raggiungere i tuoi obiettivi di fitness attraverso un approccio personalizzato e scientifico. Ogni percorso è unico, proprio come te.
-              </p>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-6">
-              {features.map((feature, index) => (
-                <div
-                  key={feature.title}
-                  className="group p-6 rounded-xl bg-card shadow-card card-hover cursor-pointer"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors duration-300">
-                    <feature.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="font-display text-lg font-semibold text-foreground mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="font-body text-sm text-muted-foreground">
-                    {feature.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Content - Logo Display */}
-          <div className="relative flex items-center justify-center">
-            <div className="relative">
-              {/* Glow Effect */}
-              <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl scale-110" />
-              
-              {/* Logo Container */}
-              <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full bg-card shadow-card-hover flex items-center justify-center animate-float">
-                <img
-                  src={logo}
-                  alt="DC Logo"
-                  className="w-48 h-48 md:w-64 md:h-64 object-contain"
-                />
+        <div className="section-shell bg-white/90 backdrop-blur-xl px-6 sm:px-10 md:px-12 py-12 md:py-16">
+          <div className="grid lg:grid-cols-2 gap-10 md:gap-14 items-center">
+            {/* Left Content */}
+            <div className="space-y-6 md:space-y-8">
+              <div>
+                <p className="font-body text-primary uppercase tracking-[0.2em] text-sm mb-4">
+                  Chi Sono
+                </p>
+                <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
+                  Il Tuo Partner per il<br />
+                  <span className="text-gradient">Successo Fitness</span>
+                </h2>
+                <p className="font-body text-muted-foreground text-base md:text-lg leading-relaxed">
+                  Sono Davide Carfora, Personal Trainer professionista. La mia missione è aiutarti a raggiungere i tuoi obiettivi di fitness attraverso un approccio personalizzato e scientifico. Ogni percorso è unico, proprio come te.
+                </p>
               </div>
 
-              {/* Decorative Rings */}
-              <div className="absolute inset-0 rounded-full border-2 border-primary/20 scale-110 animate-pulse" />
-              <div className="absolute inset-0 rounded-full border border-primary/10 scale-125" />
+              <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
+                {features.map((feature, index) => (
+                  <div
+                    key={feature.title}
+                    className="group p-5 md:p-6 rounded-xl bg-white/80 shadow-card card-hover cursor-pointer border border-border/70"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors duration-300">
+                      <feature.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h3 className="font-display text-lg font-semibold text-foreground mb-2">
+                      {feature.title}
+                    </h3>
+                    <p className="font-body text-sm text-muted-foreground">
+                      {feature.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Content - Logo Display */}
+            <div className="relative flex items-center justify-center">
+              <div className="relative">
+                {/* Glow Effect */}
+                <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl scale-110" />
+
+                {/* Logo Container */}
+                <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full bg-dark text-primary-foreground shadow-card-hover flex items-center justify-center animate-float border border-primary/20">
+                  <img
+                    src={logo}
+                    alt="DC Logo"
+                    className="w-48 h-48 md:w-64 md:h-64 object-contain"
+                  />
+                  <div className="absolute inset-4 rounded-full border border-primary/20" />
+                </div>
+
+                {/* Decorative Rings */}
+                <div className="absolute inset-0 rounded-full border-2 border-primary/25 scale-110 animate-pulse" />
+                <div className="absolute inset-0 rounded-full border border-primary/15 scale-125" />
+              </div>
             </div>
           </div>
         </div>

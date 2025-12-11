@@ -109,24 +109,24 @@ const CertificationsSection = () => {
 
       <div className="container-custom relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-in">
+        <div className="text-center mb-12 md:mb-16 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6">
             <Award className="w-5 h-5" />
             <span className="font-body text-sm font-medium uppercase tracking-wider">
               Formazione Certificata
             </span>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4 md:mb-6">
             Le Mie <span className="text-gradient">Certificazioni</span>
           </h2>
-          <p className="font-body text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="font-body text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             Qualifiche riconosciute a livello nazionale dal CONI e dai principali enti di promozione sportiva.
             Iscritto all'Albo Nazionale dei Tecnici Sportivi.
           </p>
         </div>
 
         {/* Certifications Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {certifications.map((cert, index) => (
             <div
               key={index}
@@ -172,18 +172,18 @@ const CertificationsSection = () => {
         </div>
 
         {/* Albo Tecnici Info */}
-        <div className="mt-16 p-8 bg-card rounded-3xl shadow-card border border-border/50">
-          <div className="flex flex-col md:flex-row items-center gap-8">
+        <div className="mt-12 md:mt-16 p-6 md:p-8 bg-card rounded-3xl shadow-card border border-border/50">
+          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
             <div className="flex-shrink-0">
               <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center">
                 <Award className="w-12 h-12 text-primary" />
               </div>
             </div>
-            <div className="text-center md:text-left">
-              <h3 className="font-display text-2xl font-bold text-foreground mb-3">
+            <div className="text-center md:text-left space-y-3">
+              <h3 className="font-display text-xl md:text-2xl font-bold text-foreground">
                 Iscritto all'Albo Nazionale Tecnici
               </h3>
-              <p className="font-body text-muted-foreground mb-4">
+              <p className="font-body text-muted-foreground text-sm md:text-base">
                 <strong>CARFORA DAVIDE (SA)</strong> - Tecnico certificato con le seguenti qualifiche:
               </p>
               <ul className="font-body text-sm text-muted-foreground space-y-1">
