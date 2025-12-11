@@ -74,6 +74,7 @@ const monthlyPackages = [
     features: [
       "4 lezioni al mese",
       "Scheda allenamento",
+      "Allenamento small group (max 3 persone, non 1-to-1)",
       "Consulenza alimentare gratuita",
     ],
   },
@@ -85,6 +86,7 @@ const monthlyPackages = [
     features: [
       "8 lezioni al mese",
       "Scheda allenamento",
+      "Allenamento small group (max 3 persone, non 1-to-1)",
       "Consulenza alimentare gratuita",
       "Maglietta in omaggio",
     ],
@@ -98,6 +100,7 @@ const monthlyPackages = [
     features: [
       "12 lezioni al mese",
       "Scheda allenamento",
+      "Allenamento small group (max 3 persone, non 1-to-1)",
       "Consulenza alimentare gratuita",
       "Kit completo in omaggio",
     ],
@@ -228,62 +231,69 @@ const PricingSection = () => {
 
         {/* Mensili Tab */}
         {activeTab === "mensili" && (
-          <div className="grid md:grid-cols-3 gap-8 mb-16 max-w-5xl mx-auto">
-            {monthlyPackages.map((pkg, index) => (
-              <div
-                key={pkg.name}
-                className={`relative bg-card rounded-2xl p-8 shadow-card card-hover ${
-                  pkg.popular ? "ring-2 ring-primary scale-105" : ""
-                }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {pkg.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-body font-semibold rounded-full">
-                    Consigliato
-                  </div>
-                )}
-                
-                <h3 className="font-display text-2xl font-semibold text-foreground mb-1">
-                  {pkg.name}
-                </h3>
-                <p className="font-body text-primary font-medium mb-4">
-                  {pkg.sessions}
-                </p>
-                
-                <div className="mb-6">
-                  <span className="font-display text-5xl font-bold text-foreground">
-                    €{pkg.price}
-                  </span>
-                  <span className="font-body text-muted-foreground">/mese</span>
-                  <p className="font-body text-sm text-primary mt-1">
-                    Solo €{pkg.pricePerLesson} a lezione
-                  </p>
-                </div>
-                
-                <ul className="space-y-3 mb-8">
-                  {pkg.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2">
-                      <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span className="font-body text-sm text-muted-foreground">
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <a
-                  href="#contatti"
-                  className={`block text-center py-3 rounded-lg font-body font-semibold transition-all duration-300 ${
-                    pkg.popular
-                      ? "bg-primary text-primary-foreground hover:bg-teal-light"
-                      : "bg-muted text-foreground hover:bg-primary hover:text-primary-foreground"
-                  }`}
-                >
-                  Inizia Ora
-                </a>
+          <>
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 text-primary font-body text-sm font-semibold">
+                Allenamento small group: massimo 3 persone, non 1-to-1
               </div>
-            ))}
-          </div>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8 mb-16 max-w-5xl mx-auto">
+              {monthlyPackages.map((pkg, index) => (
+                <div
+                  key={pkg.name}
+                  className={`relative bg-card rounded-2xl p-8 shadow-card card-hover ${
+                    pkg.popular ? "ring-2 ring-primary scale-105" : ""
+                  }`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {pkg.popular && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-body font-semibold rounded-full">
+                      Consigliato
+                    </div>
+                  )}
+                  
+                  <h3 className="font-display text-2xl font-semibold text-foreground mb-1">
+                    {pkg.name}
+                  </h3>
+                  <p className="font-body text-primary font-medium mb-4">
+                    {pkg.sessions}
+                  </p>
+                  
+                  <div className="mb-6">
+                    <span className="font-display text-5xl font-bold text-foreground">
+                      €{pkg.price}
+                    </span>
+                    <span className="font-body text-muted-foreground">/mese</span>
+                    <p className="font-body text-sm text-primary mt-1">
+                      Solo €{pkg.pricePerLesson} a lezione
+                    </p>
+                  </div>
+                  
+                  <ul className="space-y-3 mb-8">
+                    {pkg.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2">
+                        <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="font-body text-sm text-muted-foreground">
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <a
+                    href="#contatti"
+                    className={`block text-center py-3 rounded-lg font-body font-semibold transition-all duration-300 ${
+                      pkg.popular
+                        ? "bg-primary text-primary-foreground hover:bg-teal-light"
+                        : "bg-muted text-foreground hover:bg-primary hover:text-primary-foreground"
+                    }`}
+                  >
+                    Inizia Ora
+                  </a>
+                </div>
+              ))}
+            </div>
+          </>
         )}
 
         {/* In Omaggio Section */}
