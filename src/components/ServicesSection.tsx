@@ -5,25 +5,21 @@ const services = [
     icon: Dumbbell,
     title: "Personal Training",
     description: "Allenamenti individuali personalizzati per raggiungere i tuoi obiettivi specifici, con costante monitoraggio dei progressi.",
-    price: "da €30",
   },
   {
     icon: Heart,
     title: "Fit Boxe",
     description: "Un mix esplosivo di boxe e fitness che ti permetterà di bruciare calorie e scaricare lo stress in modo divertente.",
-    price: "€30",
   },
   {
     icon: Activity,
     title: "Ginnastica Posturale",
     description: "Migliora la tua postura, previeni dolori e tensioni muscolari con esercizi mirati e tecniche specifiche.",
-    price: "€30",
   },
   {
     icon: Sparkles,
     title: "Consulenza Gratuita",
     description: "Prima lezione di prova gratuita per conoscerti e definire insieme il percorso più adatto a te.",
-    price: "Gratis",
   },
 ];
 
@@ -72,15 +68,6 @@ const ServicesSection = () => {
                 <p className="font-body text-muted-foreground text-sm mb-6 leading-relaxed">
                   {service.description}
                 </p>
-                
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-2xl font-bold text-primary">
-                    {service.price}
-                  </span>
-                  <span className="text-muted-foreground text-sm">
-                    /lezione
-                  </span>
-                </div>
               </div>
             </div>
           ))}
