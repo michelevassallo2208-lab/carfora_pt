@@ -13,7 +13,6 @@ import {
 import {
   Activity,
   BarChart3,
-  Gauge,
   Lock,
   LogOut,
   ShieldCheck,
@@ -22,37 +21,15 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { getAnalyticsEvents, type AnalyticsEvent } from "@/utils/analytics";
 
 const ADMIN_PASSWORD = "Carforabtp25!";
-
-const visitorData = [
-  { month: "Gen", visits: 520, leads: 28 },
-  { month: "Feb", visits: 610, leads: 32 },
-  { month: "Mar", visits: 750, leads: 41 },
-  { month: "Apr", visits: 880, leads: 50 },
-  { month: "Mag", visits: 920, leads: 54 },
-  { month: "Giu", visits: 970, leads: 60 },
-  { month: "Lug", visits: 1040, leads: 68 },
-  { month: "Ago", visits: 1100, leads: 70 },
-];
-
-const leadSources = [
-  { source: "Instagram", value: 42 },
-  { source: "Google", value: 28 },
-  { source: "Referral", value: 16 },
-  { source: "Whatsapp", value: 10 },
-  { source: "Email", value: 4 },
-];
-
-const retentionData = [
-  { label: "Nuovi", value: 62 },
-  { label: "Ricorrenti", value: 38 },
-];
 
 const Insight = () => {
   const [password, setPassword] = useState("");
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [error, setError] = useState("");
+  const [events, setEvents] = useState<AnalyticsEvent[]>([]);
 
   useEffect(() => {
     const stored = sessionStorage.getItem("insight-authenticated");
@@ -60,6 +37,12 @@ const Insight = () => {
       setIsAuthorized(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (isAuthorized) {
+      setEvents(getAnalyticsEvents());
+    }
+  }, [isAuthorized]);
 
   const submitPassword = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -78,26 +61,81 @@ const Insight = () => {
     sessionStorage.removeItem("insight-authenticated");
   };
 
-  const conversionRate = useMemo(() => {
-    const last = visitorData.at(-1);
-    return last ? Math.round((last.leads / last.visits) * 1000) / 10 : 0;
-  }, []);
+  const recentGrowth = useMemo(() => {
+    if (!events.length) return 0;
+    const recent = events.slice(-50);
+    const grouped = recent.reduce<Record<string, number>>((acc, event) => {
+      const day = new Date(event.timestamp).toISOString().split("T")[0];
+      acc[day] = (acc[day] || 0) + 1;
+      return acc;
+    }, {});
+    const values = Object.values(grouped);
+    if (!values.length) return 0;
+    const max = Math.max(...values);
+    const min = Math.min(...values);
+    return min === 0 ? max : Math.round(((max - min) / min) * 100);
+  }, [events]);
 
   const averageVisits = useMemo(() => {
-    if (!visitorData.length) return 0;
-    const total = visitorData.reduce((sum, entry) => sum + entry.visits, 0);
-    return Math.round(total / visitorData.length);
-  }, []);
+    if (!events.length) return 0;
+    const days = new Set(
+      events.map((event) => new Date(event.timestamp).toISOString().split("T")[0]),
+    ).size;
+    if (!days) return 0;
+    return Math.round(events.length / days);
+  }, [events]);
 
-  const peakGrowth = useMemo(() => {
-    if (visitorData.length < 2) return 0;
-    const diffs = visitorData.map((entry, index) => {
-      if (index === 0) return 0;
-      const prev = visitorData[index - 1];
-      return Math.round(((entry.visits - prev.visits) / prev.visits) * 100);
+  const totalSessions = useMemo(() => {
+    if (!events.length) return 0;
+    return new Set(events.map((event) => event.sessionId)).size;
+  }, [events]);
+
+  const visitsByDay = useMemo(() => {
+    const now = new Date();
+    const daysToShow = 30;
+    const buckets: Record<string, number> = {};
+
+    for (let index = daysToShow - 1; index >= 0; index -= 1) {
+      const day = new Date(now);
+      day.setDate(now.getDate() - index);
+      const key = day.toISOString().split("T")[0];
+      buckets[key] = 0;
+    }
+
+    events.forEach((event) => {
+      const key = new Date(event.timestamp).toISOString().split("T")[0];
+      if (key in buckets) {
+        buckets[key] += 1;
+      }
     });
-    return Math.max(...diffs);
-  }, []);
+
+    return Object.entries(buckets).map(([day, visits]) => ({ day, visits }));
+  }, [events]);
+
+  const topPages = useMemo(() => {
+    const counts = events.reduce<Record<string, number>>((acc, event) => {
+      acc[event.path] = (acc[event.path] || 0) + 1;
+      return acc;
+    }, {});
+
+    return Object.entries(counts)
+      .map(([path, value]) => ({ path, value }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 5);
+  }, [events]);
+
+  const topReferrers = useMemo(() => {
+    const counts = events.reduce<Record<string, number>>((acc, event) => {
+      const source = event.referrer || "direct";
+      acc[source] = (acc[source] || 0) + 1;
+      return acc;
+    }, {});
+
+    return Object.entries(counts)
+      .map(([source, value]) => ({ source, value }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 5);
+  }, [events]);
 
   return (
     <main className="overflow-hidden bg-background min-h-screen">
@@ -114,13 +152,14 @@ const Insight = () => {
               <div className="space-y-4">
                 <h1 className="font-display text-4xl md:text-5xl text-foreground">Area Insight</h1>
                 <p className="text-lg text-muted-foreground max-w-2xl font-body">
-                  Monitoraggio delle visite, lead e performance commerciali. L&apos;accesso è protetto da password e dedicato esclusivamente all&apos;amministrazione.
+                  Monitoraggio delle visite reali rilevate sul sito. I dati vengono raccolti in locale ad ogni
+                  caricamento pagina e resi visibili solo all&apos;amministrazione dopo autenticazione.
                 </p>
               </div>
               <div className="grid sm:grid-cols-3 gap-4">
                 <Card className="bg-card/80 border-border/70 shadow-elegant">
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-muted-foreground text-sm font-body">Visite medie mensili</CardTitle>
+                    <CardTitle className="text-muted-foreground text-sm font-body">Visite medie giornaliere</CardTitle>
                   </CardHeader>
                   <CardContent className="flex items-center gap-3">
                     <div className="p-3 rounded-xl bg-primary/10 text-primary">
@@ -128,35 +167,35 @@ const Insight = () => {
                     </div>
                     <div>
                       <div className="text-2xl font-display text-foreground">{averageVisits}</div>
-                      <p className="text-xs text-muted-foreground font-body">Media ultimi 8 mesi</p>
+                      <p className="text-xs text-muted-foreground font-body">Basata sui dati tracciati</p>
                     </div>
                   </CardContent>
                 </Card>
                 <Card className="bg-card/80 border-border/70 shadow-elegant">
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-muted-foreground text-sm font-body">Tasso di conversione</CardTitle>
+                    <CardTitle className="text-muted-foreground text-sm font-body">Sessioni uniche</CardTitle>
                   </CardHeader>
                   <CardContent className="flex items-center gap-3">
                     <div className="p-3 rounded-xl bg-primary/10 text-primary">
                       <TrendingUp />
                     </div>
                     <div>
-                      <div className="text-2xl font-display text-foreground">{conversionRate}%</div>
-                      <p className="text-xs text-muted-foreground font-body">Lead su visitatori</p>
+                      <div className="text-2xl font-display text-foreground">{totalSessions}</div>
+                      <p className="text-xs text-muted-foreground font-body">Calcolate dal browser</p>
                     </div>
                   </CardContent>
                 </Card>
                 <Card className="bg-card/80 border-border/70 shadow-elegant">
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-muted-foreground text-sm font-body">Picco di crescita</CardTitle>
+                    <CardTitle className="text-muted-foreground text-sm font-body">Crescita recente</CardTitle>
                   </CardHeader>
                   <CardContent className="flex items-center gap-3">
                     <div className="p-3 rounded-xl bg-primary/10 text-primary">
-                      <Gauge />
+                      <Users />
                     </div>
                     <div>
-                      <div className="text-2xl font-display text-foreground">+{peakGrowth}%</div>
-                      <p className="text-xs text-muted-foreground font-body">Mese migliore</p>
+                      <div className="text-2xl font-display text-foreground">+{recentGrowth}%</div>
+                      <p className="text-xs text-muted-foreground font-body">Varianza visite recenti</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -231,29 +270,27 @@ const Insight = () => {
             <div className="grid xl:grid-cols-[1.4fr_1fr] gap-8 mb-8">
               <Card className="bg-card/80 border-border/70 shadow-elegant">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-xl font-display">Andamento visite & lead</CardTitle>
+                  <CardTitle className="text-xl font-display">Andamento visite</CardTitle>
                   <BarChart3 className="text-primary" />
                 </CardHeader>
                 <CardContent className="space-y-2">
                   <ChartContainer
                     config={{
                       visits: { label: "Visite", color: "hsl(var(--primary))" },
-                      leads: { label: "Lead", color: "hsl(var(--secondary))" },
                     }}
                     className="h-[320px]"
                   >
-                    <AreaChart data={visitorData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                    <AreaChart data={visitsByDay} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
                       <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
-                      <XAxis dataKey="month" tickLine={false} axisLine={false} />
+                      <XAxis dataKey="day" tickLine={false} axisLine={false} />
                       <YAxis tickLine={false} axisLine={false} />
                       <ChartTooltip content={<ChartTooltipContent />} />
                       <Area type="monotone" dataKey="visits" stackId="1" stroke="var(--color-visits)" fill="var(--color-visits)" fillOpacity={0.2} />
-                      <Area type="monotone" dataKey="leads" stackId="2" stroke="var(--color-leads)" fill="var(--color-leads)" fillOpacity={0.3} />
                       <ChartLegend content={<ChartLegendContent />} />
                     </AreaChart>
                   </ChartContainer>
                   <p className="text-sm text-muted-foreground font-body">
-                    La curva mostra l&apos;ultimo trimestre con focus su correlazione tra volume di visite e lead raccolti.
+                    Serie alimentata dai log reali delle ultime 4 settimane salvati nel browser.
                   </p>
                 </CardContent>
               </Card>
@@ -261,54 +298,62 @@ const Insight = () => {
               <div className="grid sm:grid-cols-2 gap-4">
                 <Card className="bg-card/80 border-border/70 shadow-elegant">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-lg font-display">Origine Lead</CardTitle>
+                    <CardTitle className="text-lg font-display">Pagine più viste</CardTitle>
                     <Users className="text-primary" />
                   </CardHeader>
                   <CardContent>
-                    <ChartContainer
-                      config={{
-                        value: { label: "Lead", color: "hsl(var(--primary))" },
-                      }}
-                      className="h-[240px]"
-                    >
-                      <BarChart data={leadSources} layout="vertical" margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
-                        <XAxis type="number" hide />
-                        <YAxis dataKey="source" type="category" tickLine={false} axisLine={false} width={80} />
-                        <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
-                        <Bar dataKey="value" radius={[8, 8, 8, 8]} />
-                        <ChartLegend content={<ChartLegendContent />} />
-                      </BarChart>
-                    </ChartContainer>
+                    {topPages.length ? (
+                      <ChartContainer
+                        config={{
+                          value: { label: "Visite", color: "hsl(var(--primary))" },
+                        }}
+                        className="h-[240px]"
+                      >
+                        <BarChart data={topPages} layout="vertical" margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+                          <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
+                          <XAxis type="number" hide />
+                          <YAxis dataKey="path" type="category" tickLine={false} axisLine={false} width={120} />
+                          <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
+                          <Bar dataKey="value" radius={[8, 8, 8, 8]} />
+                          <ChartLegend content={<ChartLegendContent />} />
+                        </BarChart>
+                      </ChartContainer>
+                    ) : (
+                      <p className="text-sm text-muted-foreground font-body">Nessun dato registrato finora.</p>
+                    )}
                     <p className="text-sm text-muted-foreground font-body mt-3">
-                      Identifica i canali che generano più richieste e regola i contenuti di conseguenza.
+                      Classifica aggiornata con le pagine effettivamente aperte dagli utenti.
                     </p>
                   </CardContent>
                 </Card>
 
                 <Card className="bg-card/80 border-border/70 shadow-elegant">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-lg font-display">Engagement</CardTitle>
+                    <CardTitle className="text-lg font-display">Referrer</CardTitle>
                     <Activity className="text-primary" />
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground font-body">Sessioni di qualità</span>
-                      <span className="text-xl font-display text-foreground">78%</span>
-                    </div>
-                    <div className="h-2 rounded-full bg-muted overflow-hidden">
-                      <div className="h-full bg-primary rounded-full" style={{ width: "78%" }} />
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      {retentionData.map((item) => (
-                        <div key={item.label} className="p-3 rounded-xl bg-muted/60">
-                          <p className="text-xs uppercase tracking-wide text-muted-foreground font-body">{item.label}</p>
-                          <p className="text-xl font-display text-foreground mt-1">{item.value}%</p>
-                        </div>
-                      ))}
-                    </div>
+                    {topReferrers.length ? (
+                      <ChartContainer
+                        config={{
+                          value: { label: "Visite", color: "hsl(var(--primary))" },
+                        }}
+                        className="h-[240px]"
+                      >
+                        <BarChart data={topReferrers} layout="vertical" margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+                          <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
+                          <XAxis type="number" hide />
+                          <YAxis dataKey="source" type="category" tickLine={false} axisLine={false} width={160} />
+                          <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
+                          <Bar dataKey="value" radius={[8, 8, 8, 8]} />
+                          <ChartLegend content={<ChartLegendContent />} />
+                        </BarChart>
+                      </ChartContainer>
+                    ) : (
+                      <p className="text-sm text-muted-foreground font-body">Nessuna sorgente registrata.</p>
+                    )}
                     <p className="text-sm text-muted-foreground font-body">
-                      Misura il rapporto tra nuovi visitatori e utenti di ritorno per capire la fidelizzazione.
+                      Vengono mostrati solo i referrer effettivi (direct, social o altri domini) raccolti dai log locali.
                     </p>
                   </CardContent>
                 </Card>
