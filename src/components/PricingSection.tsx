@@ -1,5 +1,4 @@
-import { Check, Star, Gift, Zap } from "lucide-react";
-import { useState } from "react";
+import { Check, Star, Gift } from "lucide-react";
 
 const packages = [
   {
@@ -107,16 +106,7 @@ const monthlyPackages = [
   },
 ];
 
-const extras = [
-  { name: "Scheda Allenamento Personalizzata", price: "70", icon: Zap },
-  { name: "Scheda Consigli Alimentari", price: "Gratis", icon: Gift },
-  { name: "Scheda Consigli Integratori", price: "Gratis", icon: Gift },
-  { name: "Consulenza Personal Training", price: "Gratis", icon: Gift },
-];
-
 const PricingSection = () => {
-  const [activeTab, setActiveTab] = useState<"lezioni" | "mensili">("lezioni");
-
   return (
     <section id="prezzi" className="section-padding bg-background relative overflow-hidden">
       {/* Decorative Background */}
@@ -141,103 +131,21 @@ const PricingSection = () => {
             Prima lezione di prova GRATUITA
           </p>
         </div>
-
-        {/* Tabs */}
-        <div className="flex justify-center mb-12">
-          <div className="inline-flex bg-muted p-1 rounded-lg">
-            <button
-              onClick={() => setActiveTab("lezioni")}
-              className={`px-6 py-3 rounded-md font-body font-medium text-sm transition-all duration-300 ${
-                activeTab === "lezioni"
-                  ? "bg-primary text-primary-foreground shadow-card"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Lezioni Singole & Pacchetti
-            </button>
-            <button
-              onClick={() => setActiveTab("mensili")}
-              className={`px-6 py-3 rounded-md font-body font-medium text-sm transition-all duration-300 ${
-                activeTab === "mensili"
-                  ? "bg-primary text-primary-foreground shadow-card"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Abbonamenti Mensili
-            </button>
-          </div>
-        </div>
-
-        {/* Lezioni Tab */}
-        {activeTab === "lezioni" && (
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
-            {packages.map((pkg, index) => (
-              <div
-                key={pkg.name}
-                className={`relative bg-card rounded-2xl p-6 shadow-card card-hover ${
-                  pkg.popular ? "ring-2 ring-primary" : ""
-                }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {pkg.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-body font-semibold rounded-full">
-                    Più Scelto
-                  </div>
-                )}
-                
-                <h3 className="font-display text-xl font-semibold text-foreground mb-2">
-                  {pkg.name}
-                </h3>
-                <p className="font-body text-sm text-muted-foreground mb-4">
-                  {pkg.description}
-                </p>
-                
-                <div className="mb-6">
-                  <span className="font-display text-4xl font-bold text-foreground">
-                    €{pkg.price}
-                  </span>
-                  {pkg.pricePerLesson && (
-                    <span className="font-body text-sm text-muted-foreground block mt-1">
-                      €{pkg.pricePerLesson}/lezione
-                    </span>
-                  )}
-                </div>
-                
-                <ul className="space-y-3 mb-6">
-                  {pkg.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2">
-                      <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span className="font-body text-sm text-muted-foreground">
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <a
-                  href="#contatti"
-                  className={`block text-center py-3 rounded-lg font-body font-semibold text-sm transition-all duration-300 ${
-                    pkg.popular
-                      ? "bg-primary text-primary-foreground hover:bg-teal-light"
-                      : "bg-muted text-foreground hover:bg-primary hover:text-primary-foreground"
-                  }`}
-                >
-                  Scegli
-                </a>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Mensili Tab */}
-        {activeTab === "mensili" && (
-          <>
-            <div className="text-center mb-8">
+        <div className="space-y-16">
+          <div className="space-y-8">
+            <div className="text-center">
               <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 text-primary font-body text-sm font-semibold">
                 Allenamento small group: massimo 3 persone, non 1-to-1
               </div>
+              <h3 className="font-display text-3xl font-bold text-foreground mt-6">
+                Lezioni di gruppo
+              </h3>
+              <p className="font-body text-muted-foreground mt-2">
+                Percorsi mensili pensati per allenarti in squadra mantenendo un approccio personalizzato.
+              </p>
             </div>
-            <div className="grid md:grid-cols-3 gap-8 mb-16 max-w-5xl mx-auto">
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {monthlyPackages.map((pkg, index) => (
                 <div
                   key={pkg.name}
@@ -251,14 +159,14 @@ const PricingSection = () => {
                       Consigliato
                     </div>
                   )}
-                  
+
                   <h3 className="font-display text-2xl font-semibold text-foreground mb-1">
                     {pkg.name}
                   </h3>
                   <p className="font-body text-primary font-medium mb-4">
                     {pkg.sessions}
                   </p>
-                  
+
                   <div className="mb-6">
                     <span className="font-display text-5xl font-bold text-foreground">
                       €{pkg.price}
@@ -268,7 +176,7 @@ const PricingSection = () => {
                       Solo €{pkg.pricePerLesson} a lezione
                     </p>
                   </div>
-                  
+
                   <ul className="space-y-3 mb-8">
                     {pkg.features.map((feature) => (
                       <li key={feature} className="flex items-start gap-2">
@@ -279,7 +187,7 @@ const PricingSection = () => {
                       </li>
                     ))}
                   </ul>
-                  
+
                   <a
                     href="#contatti"
                     className={`block text-center py-3 rounded-lg font-body font-semibold transition-all duration-300 ${
@@ -293,47 +201,84 @@ const PricingSection = () => {
                 </div>
               ))}
             </div>
-          </>
-        )}
 
-        {/* In Omaggio Section */}
-        {activeTab === "mensili" && (
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-3 px-6 py-3 bg-secondary rounded-full">
-              <Gift className="w-5 h-5 text-primary" />
-              <span className="font-body text-foreground font-medium">
-                In omaggio: Maglietta con logo, asciugamano e portachiave
-              </span>
+            <div className="text-center">
+              <div className="inline-flex items-center gap-3 px-6 py-3 bg-secondary rounded-full">
+                <Gift className="w-5 h-5 text-primary" />
+                <span className="font-body text-foreground font-medium">
+                  In omaggio: Maglietta con logo, asciugamano e portachiave
+                </span>
+              </div>
             </div>
           </div>
-        )}
 
-        {/* Extras */}
-        <div className="bg-muted rounded-2xl p-8">
-          <h3 className="font-display text-2xl font-semibold text-foreground text-center mb-8">
-            Servizi Extra
-          </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {extras.map((extra) => (
-              <div
-                key={extra.name}
-                className="flex items-center gap-4 bg-card rounded-xl p-4"
-              >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <extra.icon className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="font-body text-sm font-medium text-foreground">
-                    {extra.name}
+          <div className="space-y-6">
+            <div className="text-center">
+              <h3 className="font-display text-3xl font-bold text-foreground">
+                Lezioni 1-to-1 e pacchetti
+              </h3>
+              <p className="font-body text-muted-foreground mt-2">
+                Sessioni individuali e pacchetti personal training per lavorare in modo esclusivo sui tuoi obiettivi.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+              {packages.map((pkg, index) => (
+                <div
+                  key={pkg.name}
+                  className={`relative bg-card rounded-2xl p-6 shadow-card card-hover ${
+                    pkg.popular ? "ring-2 ring-primary" : ""
+                  }`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {pkg.popular && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-body font-semibold rounded-full">
+                      Più Scelto
+                    </div>
+                  )}
+
+                  <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+                    {pkg.name}
+                  </h3>
+                  <p className="font-body text-sm text-muted-foreground mb-4">
+                    {pkg.description}
                   </p>
-                  <p className={`font-display text-lg font-bold ${
-                    extra.price === "Gratis" ? "text-primary" : "text-foreground"
-                  }`}>
-                    {extra.price === "Gratis" ? "Gratis" : `€${extra.price}`}
-                  </p>
+
+                  <div className="mb-6">
+                    <span className="font-display text-4xl font-bold text-foreground">
+                      €{pkg.price}
+                    </span>
+                    {pkg.pricePerLesson && (
+                      <span className="font-body text-sm text-muted-foreground block mt-1">
+                        €{pkg.pricePerLesson}/lezione
+                      </span>
+                    )}
+                  </div>
+
+                  <ul className="space-y-3 mb-6">
+                    {pkg.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2">
+                        <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="font-body text-sm text-muted-foreground">
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <a
+                    href="#contatti"
+                    className={`block text-center py-3 rounded-lg font-body font-semibold text-sm transition-all duration-300 ${
+                      pkg.popular
+                        ? "bg-primary text-primary-foreground hover:bg-teal-light"
+                        : "bg-muted text-foreground hover:bg-primary hover:text-primary-foreground"
+                    }`}
+                  >
+                    Scegli
+                  </a>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

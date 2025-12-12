@@ -29,6 +29,7 @@ const Navbar = () => {
     { href: "/trasformazioni", label: "Trasformazioni", isPage: true },
     { href: "#certificazioni", label: "Certificazioni" },
     { href: "#prezzi", label: "Prezzi" },
+    { href: "/insight", label: "Insight", isPage: true },
     { href: "#contatti", label: "Contatti" },
   ];
 
