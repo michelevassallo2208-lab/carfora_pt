@@ -1,24 +1,6 @@
-import { Phone, Mail, Clock, MapPin, Instagram, Send } from "lucide-react";
-import { useState } from "react";
-import { toast } from "@/hooks/use-toast";
+import { Phone, Mail, Clock, MapPin, Instagram } from "lucide-react";
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Messaggio Inviato!",
-      description: "Ti risponderò il prima possibile.",
-    });
-    setFormData({ name: "", email: "", phone: "", message: "" });
-  };
-
   const contactInfo = [
     {
       icon: Phone,
@@ -69,116 +51,50 @@ const ContactSection = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div className="bg-card rounded-2xl p-8 shadow-card">
-            <h3 className="font-display text-2xl font-semibold text-foreground mb-6">
-              Inviami un Messaggio
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label className="font-body text-sm text-muted-foreground block mb-2">
-                  Nome e Cognome
-                </label>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background font-body text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300"
-                  placeholder="Il tuo nome"
-                />
-              </div>
-              <div className="grid sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="font-body text-sm text-muted-foreground block mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background font-body text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300"
-                    placeholder="email@esempio.it"
-                  />
-                </div>
-                <div>
-                  <label className="font-body text-sm text-muted-foreground block mb-2">
-                    Telefono
-                  </label>
-                  <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background font-body text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300"
-                    placeholder="+39 xxx xxx xxxx"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="font-body text-sm text-muted-foreground block mb-2">
-                  Messaggio
-                </label>
-                <textarea
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  required
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background font-body text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300 resize-none"
-                  placeholder="Raccontami i tuoi obiettivi..."
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full py-4 bg-primary text-primary-foreground font-body font-semibold rounded-lg hover:bg-teal-light transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02]"
+        <div className="space-y-10 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 gap-6">
+            {contactInfo.map((info) => (
+              <div
+                key={info.label}
+                className="group p-6 rounded-xl bg-primary-foreground/5 border border-primary-foreground/10 hover:border-primary/50 transition-all duration-300"
               >
-                <Send className="w-5 h-5" />
-                Invia Messaggio
-              </button>
-            </form>
+                <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <info.icon className="w-6 h-6 text-primary" />
+                </div>
+                <p className="font-body text-sm text-primary-foreground/60 mb-1">
+                  {info.label}
+                </p>
+                {info.action ? (
+                  <a
+                    href={info.action}
+                    className="font-display text-lg text-primary-foreground font-medium hover:text-primary transition-colors duration-300"
+                  >
+                    {info.value}
+                  </a>
+                ) : (
+                  <p className="font-display text-lg text-primary-foreground font-medium">
+                    {info.value}
+                  </p>
+                )}
+                {info.sublabel && (
+                  <p className="font-body text-sm text-primary-foreground/60 mt-1">
+                    {info.sublabel}
+                  </p>
+                )}
+              </div>
+            ))}
           </div>
 
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div className="grid sm:grid-cols-2 gap-6">
-              {contactInfo.map((info) => (
-                <div
-                  key={info.label}
-                  className="group p-6 rounded-xl bg-primary-foreground/5 border border-primary-foreground/10 hover:border-primary/50 transition-all duration-300"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <info.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <p className="font-body text-sm text-primary-foreground/60 mb-1">
-                    {info.label}
-                  </p>
-                  {info.action ? (
-                    <a
-                      href={info.action}
-                      className="font-display text-lg text-primary-foreground font-medium hover:text-primary transition-colors duration-300"
-                    >
-                      {info.value}
-                    </a>
-                  ) : (
-                    <p className="font-display text-lg text-primary-foreground font-medium">
-                      {info.value}
-                    </p>
-                  )}
-                  {info.sublabel && (
-                    <p className="font-body text-sm text-primary-foreground/60 mt-1">
-                      {info.sublabel}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Social Links */}
-            <div className="p-6 rounded-xl bg-gradient-to-r from-primary/20 to-primary/10 border border-primary/20">
-              <h4 className="font-display text-xl font-semibold text-primary-foreground mb-4">
-                Seguimi sui Social
-              </h4>
+          <div className="p-6 rounded-xl bg-gradient-to-r from-primary/20 to-primary/10 border border-primary/20 text-center sm:text-left">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h4 className="font-display text-xl font-semibold text-primary-foreground mb-2">
+                  Seguimi sui Social
+                </h4>
+                <p className="font-body text-primary-foreground/70">
+                  Rimani aggiornato su consigli, novità e risultati dei clienti.
+                </p>
+              </div>
               <a
                 href="https://instagram.com"
                 target="_blank"
@@ -189,25 +105,24 @@ const ContactSection = () => {
                 @davidecarfora
               </a>
             </div>
+          </div>
 
-            {/* Free Trial CTA */}
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary to-teal-light text-primary-foreground">
-              <h4 className="font-display text-2xl font-bold mb-2">
-                Prima Lezione Gratuita
-              </h4>
-              <p className="font-body text-primary-foreground/90 mb-4">
-                Nessun impegno. Scopri il mio metodo di allenamento.
-              </p>
-              <a
-                href="https://wa.me/393347466610"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-primary-foreground text-primary rounded-lg font-body font-semibold hover:scale-105 transition-transform duration-300"
-              >
-                <Phone className="w-5 h-5" />
-                Contattami Ora
-              </a>
-            </div>
+          <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary to-teal-light text-primary-foreground">
+            <h4 className="font-display text-2xl font-bold mb-2">
+              Prima Lezione Gratuita
+            </h4>
+            <p className="font-body text-primary-foreground/90 mb-4">
+              Nessun impegno. Scopri il mio metodo di allenamento.
+            </p>
+            <a
+              href="https://wa.me/393347466610"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary-foreground text-primary rounded-lg font-body font-semibold hover:scale-105 transition-transform duration-300"
+            >
+              <Phone className="w-5 h-5" />
+              Contattami Ora
+            </a>
           </div>
         </div>
       </div>
